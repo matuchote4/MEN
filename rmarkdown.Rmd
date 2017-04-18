@@ -341,12 +341,9 @@ View(nuevoDF)
 
 Filtros de valores extremos
 
-
 ```{r}
 df_secundario_filtrado <- df_all_secundario %>% select(abandono) %>% filter(df_all_secundario$abandono < 140,df_all_secundario$abandono > 5 )
 ```
-
-
 
 Exportar a csv 
 ```{r}
