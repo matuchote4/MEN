@@ -277,9 +277,7 @@ Analisis de la Variable Abandono
 df_refinau <- df_all_secundario[c("id", "provincia", "anio", "abandono","Prop_Abandono")]
 ```
 
-```{r}
-summary(df_quantile$ejey)
-```
+
 
 ```{r}
 quantile(df_refinau$abandono, probs= seq(0.9,1,.01),na.rm = FALSE)
@@ -305,10 +303,14 @@ df_quantile2$ejex <- factor(df_quantile2$ejex, levels = df_quantile2$ejex[order(
 ```
 
 ```{r}
+summary(df_quantile$ejey)
+```
+
+```{r}
 
 a<-ggplot(df_quantile, aes(x = df_quantile$ejex, y = df_quantile$ejey )) + geom_col() + scale_y_continuous(labels = scales::comma) + labs(title = "Histograma de desercion") + xlab("Porcentaje") + ylab("Cantidad")
-a<-ggplot(df_quantile2, aes(x = df_quantile2$ejex, y = df_quantile2$ejey )) + geom_col() + scale_y_continuous(labels = scales::comma) + labs(title = "Histograma de desercion") + xlab("Porcentaje") + ylab("Cantidad")
-multiplot(a,b)
+b<-ggplot(df_quantile2, aes(x = df_quantile2$ejex, y = df_quantile2$ejey )) + geom_col() + scale_y_continuous(labels = scales::comma) + labs(title = "Histograma de desercion") + xlab("Porcentaje") + ylab("Cantidad")
+#multiplot(a,b)
 
 ```
 
@@ -316,6 +318,28 @@ multiplot(a,b)
 summary(df_quantile$ejey)
 
 ```
+
+```{r}
+vecStatsAbandono <- summary(df_refinau$abandono)
+
+Min. <- as.integer(vecStatsAbandono[1])
+
+nuevoDF <- as.data.frame(Min.)
+
+#nuevoDF$Min. <- as.integer(vecStatsAbandono["Min."])
+nuevoDF$"1st Qu." <- as.integer(vecStatsAbandono["1st Qu."])
+nuevoDF$Median <- as.numeric(vecStatsAbandono["Median"])
+nuevoDF$Mean <- as.numeric(vecStatsAbandono["Mean"])
+nuevoDF$"St. dev." <- sd(df_refinau$abandono)
+nuevoDF$"3rd Qu." <- as.integer(vecStatsAbandono["3rd Qu."])
+nuevoDF$"Max." <- as.integer(vecStatsAbandono["Max."])
+
+
+
+View(nuevoDF)
+```
+
+
 
 Exportar a csv 
 ```{r}
