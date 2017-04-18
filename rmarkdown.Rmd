@@ -285,14 +285,21 @@ quantile(df_refinau$abandono, probs= seq(0.99,1,.001),na.rm = FALSE)
 ```
 
 ```{r}
-df_quantile  <- as.data.frame(quantile(df_refinau$abandono, probs= seq(0.8,0.99,.01),na.rm = FALSE))
+df_quantile  <- as.data.frame(quantile(df_refinau$abandono, probs= seq(0.8,1,.01),na.rm = FALSE))
 df_quantile$ejex <- rownames(df_quantile)
 colnames(df_quantile) <- c("ejey","ejex")
+df_quantile$ejex <- factor(df_quantile$ejex, levels = df_quantile$ejex[order(df_quantile$ejey)])
+
+df_quantile2  <- as.data.frame(quantile(df_refinau$abandono, probs= seq(0.99,1,.001),na.rm = FALSE))
+df_quantile2$ejex <- rownames(df_quantile2)
+colnames(df_quantile2) <- c("ejey","ejex")
+df_quantile2$ejex <- factor(df_quantile2$ejex, levels = df_quantile2$ejex[order(df_quantile2$ejey)])
 
 ```
 
 ```{r}
 ggplot(df_quantile, aes(x = df_quantile$ejex, y = df_quantile$ejey )) + geom_col() + scale_y_continuous(labels = scales::comma) + labs(title = "Histograma de desercion") + xlab("Porcentaje") + ylab("Cantidad")
+ggplot(df_quantile2, aes(x = df_quantile2$ejex, y = df_quantile2$ejey )) + geom_col() + scale_y_continuous(labels = scales::comma) + labs(title = "Histograma de desercion") + xlab("Porcentaje") + ylab("Cantidad")
 ```
 
 ```{r}
