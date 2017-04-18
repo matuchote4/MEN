@@ -275,6 +275,13 @@ Analisis de la Variable Abandono
 
 ```{r}
 df_refinau <- df_all_secundario[c("id", "provincia", "anio", "abandono","Prop_Abandono")]
+```
+
+```{r}
+summary(df_quantile$ejey)
+```
+
+```{r}
 quantile(df_refinau$abandono, probs= seq(0.9,1,.01),na.rm = FALSE)
 ```
 
@@ -302,6 +309,12 @@ df_quantile2$ejex <- factor(df_quantile2$ejex, levels = df_quantile2$ejex[order(
 a<-ggplot(df_quantile, aes(x = df_quantile$ejex, y = df_quantile$ejey )) + geom_col() + scale_y_continuous(labels = scales::comma) + labs(title = "Histograma de desercion") + xlab("Porcentaje") + ylab("Cantidad")
 a<-ggplot(df_quantile2, aes(x = df_quantile2$ejex, y = df_quantile2$ejey )) + geom_col() + scale_y_continuous(labels = scales::comma) + labs(title = "Histograma de desercion") + xlab("Porcentaje") + ylab("Cantidad")
 multiplot(a,b)
+
+```
+
+```{r}
+summary(df_quantile$ejey)
+
 ```
 
 Exportar a csv 
