@@ -112,7 +112,7 @@ Base_4_Usuario2015 <- read_csv("2015/Base 4 Usuario.csv",
 
 ```
 
-Insert Año
+Insert A?o
 ```{r}
 Base_2_Usuario2011$anio <- 2011
 Base_3_Usuario2011$anio <- 2011
@@ -164,7 +164,7 @@ rm(df_23_2015, Base_2_Usuario2015, Base_3_Usuario2015, Base_4_Usuario2015)
 
 ```
 
-Unimos por año
+Unimos por a?o
 ```{r}
 #df_2011_2012 <- merge(df_234_2011, df_234_2012, by=c("id", "anio"))
 df_all <- rbind(df_234_2011, df_234_2012, df_234_2013, df_234_2014, df_234_2015)
@@ -276,17 +276,19 @@ Analisis de la Variable Abandono
 df_refinau <- df_all_secundario[c("id", "provincia", "anio", "abandono","Prop_Abandono")]
 quantile(df_refinau$abandono, probs= seq(0.9,1,.01),na.rm = FALSE)
 ```
+
 ```{r}
 
 quantile(df_refinau$abandono, probs= seq(0.99,1,.001),na.rm = FALSE)
 
 ```
-```{r}
 
+```{r}
 df_quantile  <- quantile(df_refinau$abandono, probs= seq(0.4,1,.01),na.rm = FALSE)
 
 #quantile(df_refinau$Prop_Abandono, probs= seq(0.9,1,.01),na.rm = TRUE)
 ```
+
 ```{r}
 ggplot(df_quantile, aes(x = df., y = obs)) + geom_col() + scale_y_continuous(labels = scales::comma) + labs(title = "Histograma de Consumo") + xlab("Consumo (kW)") + ylab("Observaciones")
 ```
@@ -300,6 +302,6 @@ Exportar a csv
 write_csv(df_all_secundario, "df_all.csv")
 ```
 
-
+PRueba para commit
 
 
