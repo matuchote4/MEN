@@ -259,7 +259,6 @@ df_all_secundario$Prop_Sobreedad <- df_all_secundario$totalSobreedad / df_all_se
 ```
 
 
-
 Agrego columna proporcion abandono sobre total de alumnos
 ```{r}
 df_all_secundario$Prop_Abandono <- df_all_secundario$abandono / df_all_secundario$totalAlumnos
@@ -284,6 +283,7 @@ quantile(df_refinau$abandono, probs= seq(0.99,1,.001),na.rm = FALSE)
 
 ```
 
+Generacion de graficos a partir del analisis de quantiles
 ```{r}
 df_quantile  <- as.data.frame(quantile(df_refinau$abandono, probs= seq(0.8,1,.01),na.rm = FALSE))
 df_quantile$ejex <- rownames(df_quantile)
@@ -298,14 +298,13 @@ df_quantile2$ejex <- factor(df_quantile2$ejex, levels = df_quantile2$ejex[order(
 ```
 
 ```{r}
-ggplot(df_quantile, aes(x = df_quantile$ejex, y = df_quantile$ejey )) + geom_col() + scale_y_continuous(labels = scales::comma) + labs(title = "Histograma de desercion") + xlab("Porcentaje") + ylab("Cantidad")
-ggplot(df_quantile2, aes(x = df_quantile2$ejex, y = df_quantile2$ejey )) + geom_col() + scale_y_continuous(labels = scales::comma) + labs(title = "Histograma de desercion") + xlab("Porcentaje") + ylab("Cantidad")
+
+a <- ggplot(df_quantile, aes(x = df_quantile$ejex, y = df_quantile$ejey )) + geom_col() + scale_y_continuous(labels = scales::comma) + labs(title = "Histograma de desercion") + xlab("Porcentaje") + ylab("Cantidad")
+b <-ggplot(df_quantile2, aes(x = df_quantile2$ejex, y = df_quantile2$ejey )) + geom_col() + scale_y_continuous(labels = scales::comma) + labs(title = "Histograma de desercion") + xlab("Porcentaje") + ylab("Cantidad")
+multiplot(a,b)
 ```
 
-```{r}
 
-#df_1pc<- head(df_refinau[order(df_refinau$abandono,decreasing=T),],.01*nrow(df_refinau))
-```
 Exportar a csv 
 ```{r}
 write_csv(df_all_secundario, "df_all.csv")
