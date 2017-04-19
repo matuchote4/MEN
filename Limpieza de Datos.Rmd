@@ -1,7 +1,7 @@
 Configurar working directory:
 
 ```{r}
-setwd("C:/Users/MatiasDeheza(PiDataS/SharePoint/Martin Zurita (Pi Data Strategy & Consulting)/MEN")
+#setwd("C:/Users/MatiasDeheza(PiDataS/SharePoint/Martin Zurita (Pi Data Strategy & Consulting)/MEN")
 #setwd("C:/MEN")
 ```
 
