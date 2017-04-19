@@ -1,0 +1,6 @@
+---
+title: "BaseLine_abandono_año_anterior"
+author: "Matias Deheza"
+date: "19 April 2017"
+output: html_document
+---

@@ -65,7 +65,7 @@ Filtros de valores extremos - La puta que te parió
 
 ```{r}
 library(dplyr)
-df_secundario_filtrado <- df_all_secundario %>% select(abandono) %>% filter(df_all_secundario$abandono < 140,df_all_secundario$abandono > 5 )
+df_secundario_filtrado <- df_all_secundario %>% select(abandono) %>% filter(df_all_secundario$abandono < 140)
 
 ```
 
