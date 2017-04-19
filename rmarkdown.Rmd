@@ -1,0 +1,337 @@
+Configurar working directory:
+
+```{r}
+#setwd("C:/Users/MatiasDeheza(PiDataS/SharePoint/Martin Zurita (Pi Data Strategy & Consulting)/MEN")
+setwd("C:/MEN")
+```
+
+
+Carga de Data Sets:
+
+```{r}
+library(readr)
+Base_2_Usuario2011 <- read_csv("2011/Base 2 Usuario.csv", col_types = cols(id = col_number()))
+Base_3_Usuario2011 <- read_csv("2011/Base 3 Usuario.csv", col_types = cols(id = col_number()))
+Base_4_Usuario2011 <- read_csv("2011/Base 4 Usuario.csv", 
+    col_types = cols(id = col_number(),
+        snu_hs_inv_cub = col_number(), 
+        snu_hs_cap_cub = col_number(),
+        sec_hs_pro_ncub = col_number(),
+        snu_hs_fuera = col_number(),
+        snu_hs_dic_ncub = col_number(),
+        snu_hs_otr_cub = col_number()))
+```
+
+```{r}
+Base_2_Usuario2012 <- read_csv("2012/Base 2 Usuario.csv", col_types = cols(id = col_number()))
+Base_3_Usuario2012 <- read_csv("2012/Base 3 Usuario.csv", col_types = cols(id = col_number()))
+Base_4_Usuario2012 <- read_csv("2012/Base 4 Usuario.csv", 
+    col_types = cols(id = col_number(),
+        snu_hs_inv_cub = col_number(), 
+        snu_hs_cap_cub = col_number(),
+        sec_hs_pro_ncub = col_number(),
+        snu_hs_fuera = col_number(),
+        snu_hs_dic_ncub = col_number(),
+        snu_hs_otr_cub = col_number(),
+        pri_hs_ncub = col_number(),
+        snu_hs_cap_ncub = col_number(),
+        snu_hs_otr_ncub = col_number()
+    )
+    
+    )
+
+
+```
+
+```{r}
+Base_2_Usuario2013 <- read_csv("2013/Base 2 Usuario.csv", col_types = cols(id = col_number()))
+Base_3_Usuario2013 <- read_csv("2013/Base 3 Usuario.csv", col_types = cols(id = col_number()))
+Base_4_Usuario2013 <- read_csv("2013/Base 4 Usuario.csv", 
+    col_types = cols(id = col_number(),
+        snu_hs_inv_cub = col_number(), 
+        snu_hs_cap_cub = col_number(),
+        sec_hs_pro_ncub = col_number(),
+        snu_hs_fuera = col_number(),
+        snu_hs_dic_ncub = col_number(),
+        snu_hs_otr_cub = col_number(),
+        pri_hs_ncub = col_number(),
+        snu_hs_cap_ncub = col_number(),
+        snu_hs_otr_ncub = col_number(),
+        snu_hs_com_ncub = col_number(),
+        sec_hs_otros_ncub = col_number()
+    )
+    
+    )
+
+
+```
+
+```{r}
+Base_2_Usuario2014 <- read_csv("2014/Base 2 Usuario.csv", col_types = cols(id = col_number()))
+Base_3_Usuario2014 <- read_csv("2014/Base 3 Usuario.csv", col_types = cols(id = col_number()))
+Base_4_Usuario2014 <- read_csv("2014/Base 4 Usuario.csv", 
+    col_types = cols(id = col_number(),
+        snu_hs_inv_cub = col_number(), 
+        snu_hs_cap_cub = col_number(),
+        sec_hs_pro_ncub = col_number(),
+        snu_hs_fuera = col_number(),
+        snu_hs_dic_ncub = col_number(),
+        snu_hs_otr_cub = col_number(),
+        pri_hs_ncub = col_number(),
+        snu_hs_cap_ncub = col_number(),
+        snu_hs_otr_ncub = col_number(),
+        snu_hs_com_ncub = col_number(),
+        sec_hs_otros_ncub = col_number()
+    )
+    
+    )
+
+
+```
+
+```{r}
+Base_2_Usuario2015 <- read_csv("2015/Base 2 Usuario.csv", col_types = cols(id = col_number()))
+Base_3_Usuario2015 <- read_csv("2015/Base 3 Usuario.csv", col_types = cols(id = col_number()))
+Base_4_Usuario2015 <- read_csv("2015/Base 4 Usuario.csv", 
+    col_types = cols(id = col_number(),
+        snu_hs_inv_cub = col_number(), 
+        snu_hs_cap_cub = col_number(),
+        sec_hs_pro_ncub = col_number(),
+        snu_hs_fuera = col_number(),
+        snu_hs_dic_ncub = col_number(),
+        snu_hs_otr_cub = col_number(),
+        pri_hs_ncub = col_number(),
+        snu_hs_cap_ncub = col_number(),
+        snu_hs_otr_ncub = col_number(),
+        snu_hs_com_ncub = col_number(),
+        sec_hs_otros_ncub = col_number(),
+        snu_hs_inv_ncub = col_number()
+    )
+    
+    )
+
+
+```
+
+Insert A?o
+```{r}
+Base_2_Usuario2011$anio <- 2011
+Base_3_Usuario2011$anio <- 2011
+Base_4_Usuario2011$anio <- 2011
+
+Base_2_Usuario2012$anio <- 2012
+Base_3_Usuario2012$anio <- 2012
+Base_4_Usuario2012$anio <- 2012
+
+Base_2_Usuario2013$anio <- 2013
+Base_3_Usuario2013$anio <- 2013
+Base_4_Usuario2013$anio <- 2013
+
+Base_2_Usuario2014$anio <- 2014
+Base_3_Usuario2014$anio <- 2014
+Base_4_Usuario2014$anio <- 2014
+
+Base_2_Usuario2015$anio <- 2015
+Base_3_Usuario2015$anio <- 2015
+Base_4_Usuario2015$anio <- 2015
+
+```
+
+Joins
+```{r}
+df_23_2011 <- merge(Base_2_Usuario2011, Base_3_Usuario2011, by = c("id", "provincia", "sector", "ambito", "inicial_maternal", "inicial_infantes", "primaria6", "primaria7", "secundaria_cb6", "secundaria_cb7", "secundaria_completa6", "secundaria_completa7", "secundaria_requisito9", "sec_inet", "snu", "snu_inet", "anio"), all.x = TRUE, all.y = TRUE)
+df_234_2011 <- merge(df_23_2011 , Base_4_Usuario2011, by = c("id", "provincia", "sector", "ambito", "inicial_maternal", "inicial_infantes", "primaria6", "primaria7", "secundaria_cb6", "secundaria_cb7", "secundaria_completa6", "secundaria_completa7", "secundaria_requisito9", "sec_inet", "snu", "snu_inet", "anio"), all.x = TRUE, all.y = TRUE)
+rm(df_23_2011, Base_2_Usuario2011, Base_3_Usuario2011, Base_4_Usuario2011)
+
+df_23_2012 <- merge(Base_2_Usuario2012, Base_3_Usuario2012, by = c("id", "provincia", "sector", "ambito", "inicial_maternal", "inicial_infantes", "primaria6", "primaria7", "secundaria_cb6", "secundaria_cb7", "secundaria_completa6", "secundaria_completa7", "secundaria_requisito9", "sec_inet", "snu", "snu_inet", "anio"), all.x = TRUE, all.y = TRUE)
+df_234_2012 <- merge(df_23_2012 , Base_4_Usuario2012, by = c("id", "provincia", "sector", "ambito", "inicial_maternal", "inicial_infantes", "primaria6", "primaria7", "secundaria_cb6", "secundaria_cb7", "secundaria_completa6", "secundaria_completa7", "secundaria_requisito9", "sec_inet", "snu", "snu_inet", "anio"), all.x = TRUE, all.y = TRUE)
+rm(df_23_2012, Base_2_Usuario2012, Base_3_Usuario2012, Base_4_Usuario2012)
+
+
+df_23_2013 <- merge(Base_2_Usuario2013, Base_3_Usuario2013, by = c("id", "provincia", "sector", "ambito", "inicial_maternal", "inicial_infantes", "primaria6", "primaria7", "secundaria_cb6", "secundaria_cb7", "secundaria_completa6", "secundaria_completa7", "secundaria_requisito9", "sec_inet", "snu", "snu_inet", "anio"), all.x = TRUE, all.y = TRUE)
+df_234_2013 <- merge(df_23_2013 , Base_4_Usuario2013, by = c("id", "provincia", "sector", "ambito", "inicial_maternal", "inicial_infantes", "primaria6", "primaria7", "secundaria_cb6", "secundaria_cb7", "secundaria_completa6", "secundaria_completa7", "secundaria_requisito9", "sec_inet", "snu", "snu_inet", "anio"), all.x = TRUE, all.y = TRUE)
+rm(df_23_2013, Base_2_Usuario2013, Base_3_Usuario2013, Base_4_Usuario2013)
+
+
+df_23_2014 <- merge(Base_2_Usuario2014, Base_3_Usuario2014, by = c("id", "provincia", "sector", "ambito", "inicial_maternal", "inicial_infantes", "primaria6", "primaria7", "secundaria_cb6", "secundaria_cb7", "secundaria_completa6", "secundaria_completa7", "secundaria_requisito9", "sec_inet", "snu", "snu_inet", "anio"), all.x = TRUE, all.y = TRUE)
+df_234_2014 <- merge(df_23_2014 , Base_4_Usuario2014, by = c("id", "provincia", "sector", "ambito", "inicial_maternal", "inicial_infantes", "primaria6", "primaria7", "secundaria_cb6", "secundaria_cb7", "secundaria_completa6", "secundaria_completa7", "secundaria_requisito9", "sec_inet", "snu", "snu_inet", "anio"), all.x = TRUE, all.y = TRUE)
+rm(df_23_2014, Base_2_Usuario2014, Base_3_Usuario2014, Base_4_Usuario2014)
+
+
+df_23_2015 <- merge(Base_2_Usuario2015, Base_3_Usuario2015, by = c("id", "provincia", "sector", "ambito", "inicial_maternal", "inicial_infantes", "primaria6", "primaria7", "secundaria_cb6", "secundaria_cb7", "secundaria_completa6", "secundaria_completa7", "secundaria_requisito9", "sec_inet", "snu", "snu_inet", "anio"), all.x = TRUE, all.y = TRUE)
+df_234_2015 <- merge(df_23_2015 , Base_4_Usuario2015, by = c("id", "provincia", "sector", "ambito", "inicial_maternal", "inicial_infantes", "primaria6", "primaria7", "secundaria_cb6", "secundaria_cb7", "secundaria_completa6", "secundaria_completa7", "secundaria_requisito9", "sec_inet", "snu", "snu_inet", "anio"), all.x = TRUE, all.y = TRUE)
+rm(df_23_2015, Base_2_Usuario2015, Base_3_Usuario2015, Base_4_Usuario2015)
+
+
+```
+
+Unimos por a?o
+```{r}
+#df_2011_2012 <- merge(df_234_2011, df_234_2012, by=c("id", "anio"))
+df_all <- rbind(df_234_2011, df_234_2012, df_234_2013, df_234_2014, df_234_2015)
+rm(df_234_2011, df_234_2012, df_234_2013, df_234_2014, df_234_2015)
+
+```
+
+
+Convertimos las columnas a logicas
+```{r}
+logic_var <- c("inicial_maternal", "inicial_infantes", "primaria6", "primaria7", "secundaria_cb6", "secundaria_cb7", "secundaria_completa6", "secundaria_completa7", "secundaria_requisito9", "sec_inet", "snu", "snu_inet")
+
+
+df_all[logic_var][df_all[logic_var]=="X"] <- TRUE
+
+df_all[logic_var][is.na(df_all[logic_var])] <- FALSE
+```
+
+
+Eliminamos colegios que no tienen secundario
+```{r}
+df_all_secundario <- subset(df_all, secundaria_completa6 == TRUE | secundaria_completa7 == TRUE | secundaria_requisito9 == TRUE | sec_inet == TRUE)
+
+rm(df_all)
+
+```
+
+Limpio las columnas de salidos sin pase de NA (asignando 0 a las que tengan NA)
+```{r}
+columnasAbandono <- c("ssp_6", "ssp_7", "ssp_8", "ssp_9", "ssp_10", "ssp_11", "ssp_12", "ssp_1314")
+
+df_all_secundario[columnasAbandono][is.na(df_all_secundario[columnasAbandono])] <- 0
+rm(columnasAbandono)
+```
+
+
+
+Agrego columna objetivo
+```{r}
+df_all_secundario$abandono <- df_all_secundario$ssp_6 + df_all_secundario$ssp_7 + df_all_secundario$ssp_8 + df_all_secundario$ssp_9 + df_all_secundario$ssp_10 + df_all_secundario$ssp_11 + df_all_secundario$ssp_12 + df_all_secundario$ssp_1314 
+```
+
+
+Agrego columna con total de alumnos, previa limpieza
+```{r}
+columnasMatricula <- c("_6", "_7", "_8", "_9", "_10", "_11", "_12", "_1314")
+
+df_all_secundario[columnasMatricula][is.na(df_all_secundario[columnasMatricula])] <- 0
+rm(columnasMatricula)
+
+df_all_secundario$totalAlumnos <- df_all_secundario$`_6` + df_all_secundario$`_7` + df_all_secundario$`_8` + df_all_secundario$`_9` + df_all_secundario$`_10` + df_all_secundario$`_11` + df_all_secundario$`_12` + df_all_secundario$`_1314`
+
+```
+
+Agrego columna cantidad de varones y proporcion de alumnos varones
+```{r}
+columnasVarones <- c("v_6", "v_7", "v_8", "v_9", "v_10", "v_11", "v_12", "v_1314")
+
+df_all_secundario[columnasVarones][is.na(df_all_secundario[columnasVarones])] <- 0
+rm(columnasVarones)
+
+df_all_secundario$Cant_Varones <- df_all_secundario$v_6 + df_all_secundario$v_7 + df_all_secundario$v_8 + df_all_secundario$v_9 + df_all_secundario$v_10 + df_all_secundario$v_11 + df_all_secundario$v_12 + df_all_secundario$v_1314
+
+df_all_secundario$Prop_varones <- df_all_secundario$Cant_Varones / df_all_secundario$totalAlumnos
+```
+
+Agrego columna cantidad de repitentes y proporcion de repitentes
+```{r}
+columnasRepitentes <- c("r_6", "r_7", "r_8", "r_9", "r_10", "r_11", "r_12", "r_1314")
+
+df_all_secundario[columnasRepitentes][is.na(df_all_secundario[columnasRepitentes])] <- 0
+rm(columnasRepitentes)
+
+df_all_secundario$totalRepitentes <- df_all_secundario$r_6 + df_all_secundario$r_7 + df_all_secundario$r_8 + df_all_secundario$r_9 + df_all_secundario$r_10 + df_all_secundario$r_11 + df_all_secundario$r_12 + df_all_secundario$r_1314
+
+df_all_secundario$Prop_Repitentes <- df_all_secundario$totalRepitentes / df_all_secundario$totalAlumnos
+
+```
+
+
+Agrego columna cantidad de alumnos con sobreedad y proporcion de alumnos con sobreedad
+```{r}
+columnasSobreedad <- c("s_6", "s_7", "s_8", "s_9", "s_10", "s_11", "s_12", "s_1314")
+
+df_all_secundario[columnasSobreedad][is.na(df_all_secundario[columnasSobreedad])] <- 0
+rm(columnasSobreedad)
+
+df_all_secundario$totalSobreedad <- df_all_secundario$s_6 + df_all_secundario$s_7 + df_all_secundario$s_8 + df_all_secundario$s_9 + df_all_secundario$s_10 + df_all_secundario$s_11 + df_all_secundario$s_12 + df_all_secundario$s_1314
+
+df_all_secundario$Prop_Sobreedad <- df_all_secundario$totalSobreedad / df_all_secundario$totalAlumnos
+```
+
+
+
+Agrego columna proporcion abandono sobre total de alumnos
+```{r}
+df_all_secundario$Prop_Abandono <- df_all_secundario$abandono / df_all_secundario$totalAlumnos
+```
+
+
+Elminacion de columnas inncesesarias
+```{r}
+  df_all_secundario <- df_all_secundario[-c(18:28,38:48, 58:62, 71:81, 90:100, 109:110, 113:117, 126:130, 139:143, 152:156,165:182,197:202 )]
+```
+
+Analisis de la Variable Abandono
+
+```{r}
+df_refinau <- df_all_secundario[c("id", "provincia", "anio", "abandono","Prop_Abandono")]
+```
+
+```{r}
+summary(df_quantile$ejey)
+```
+
+```{r}
+quantile(df_refinau$abandono, probs= seq(0.9,1,.01),na.rm = FALSE)
+```
+
+```{r}
+
+quantile(df_refinau$abandono, probs= seq(0.99,1,.001),na.rm = FALSE)
+
+```
+
+```{r}
+df_quantile  <- as.data.frame(quantile(df_refinau$abandono, probs= seq(0.8,1,.01),na.rm = FALSE))
+df_quantile$ejex <- rownames(df_quantile)
+colnames(df_quantile) <- c("ejey","ejex")
+df_quantile$ejex <- factor(df_quantile$ejex, levels = df_quantile$ejex[order(df_quantile$ejey)])
+
+df_quantile2  <- as.data.frame(quantile(df_refinau$abandono, probs= seq(0.99,1,.001),na.rm = FALSE))
+df_quantile2$ejex <- rownames(df_quantile2)
+colnames(df_quantile2) <- c("ejey","ejex")
+df_quantile2$ejex <- factor(df_quantile2$ejex, levels = df_quantile2$ejex[order(df_quantile2$ejey)])
+
+```
+
+```{r}
+library(ggplot2)
+a<-ggplot(df_quantile, aes(x = df_quantile$ejex, y = df_quantile$ejey )) + geom_col() + scale_y_continuous(labels = scales::comma) + labs(title = "Histograma de desercion") + xlab("Porcentaje") + ylab("Cantidad")
+b<-ggplot(df_quantile2, aes(x = df_quantile2$ejex, y = df_quantile2$ejey )) + geom_col() + scale_y_continuous(labels = scales::comma) + labs(title = "Histograma de desercion") + xlab("Porcentaje") + ylab("Cantidad")
+multiplot(a,b)
+
+```
+
+```{r}
+summary(df_quantile$ejey)
+
+```
+
+Filtros de valores extremos
+
+
+```{r}
+df_secundario_filtrado <- df_all_secundario %>% select(abandono) %>% filter(df_all_secundario$abandono < 140,df_all_secundario$abandono > 5 )
+
+```
+
+
+
+Exportar a csv 
+```{r}
+write_csv(df_all_secundario, "df_all.csv")
+```
+
+
+
+
