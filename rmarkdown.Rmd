@@ -325,8 +325,26 @@ df_secundario_filtrado <- df_all_secundario %>% select(abandono) %>% filter(df_a
 
 ```
 
+```{r}
+vecStatsAbandono <- summary(df_refinau$abandono)
 
+Min. <- as.integer(vecStatsAbandono[1])
 
+nuevoDF <- as.data.frame(Min.)
+
+#nuevoDF$Min. <- as.integer(vecStatsAbandono["Min."])
+nuevoDF$"1st Qu." <- as.integer(vecStatsAbandono["1st Qu."])
+nuevoDF$Median <- as.numeric(vecStatsAbandono["Median"])
+nuevoDF$Mean <- as.numeric(vecStatsAbandono["Mean"])
+nuevoDF$"St. dev." <- sd(df_refinau$abandono)
+nuevoDF$"3rd Qu." <- as.integer(vecStatsAbandono["3rd Qu."])
+nuevoDF$"Max." <- as.integer(vecStatsAbandono["Max."])
+
+View(nuevoDF)
+
+```
+
+ 
 Exportar a csv 
 ```{r}
 write_csv(df_all_secundario, "df_all.csv")
