@@ -1,0 +1,37 @@
+---
+title: "Baseline_promedio_abandono_anios_anteriores"
+author: "Martin Zurita"
+date: "19 April 2017"
+output: html_document
+---
+
+```{r}
+library(readr)
+df_all_secundario<- read_csv("df_all.csv", col_types = cols(id = col_number(), sec_hs_pro_ncub = col_number(), sec_hs_otros_ncub = col_number()))
+
+
+library(dplyr)
+df_secundario_filtrado <- df_all_secundario %>% filter(df_all_secundario$abandono < 140)
+
+df_all_secundario %>% filter(anio != 2015) -> df_secundario_resto
+
+df_all_secundario %>% filter(anio == 2015) -> df_secundario_2015
+
+df_secundario_resto %>%  select(id, anio, abandono, totalAlumnos, Prop_Abandono, provincia) %>%
+ group_by(id) %>% summarise(PromedioAbandono = mean(abandono)) -> df_promediosAbandono
+
+df_all_secundario %>% filter(id==362280618) %>% select(id, anio, abandono, totalAlumnos, Prop_Abandono, provincia) -> df_prueba
+
+class(df_promediosAbandono$PromedioAbandono) <- "integer"
+
+df_comparacion <- merge(df_promediosAbandono, df_secundario_2015, by = "id")
+
+df_comparacion %>% select(id, abandono, prediccion = PromedioAbandono) -> df_comparacion
+
+df_comparacion %>% mutate(errorAbsoluto = abs(abandono - prediccion)) -> df_comparacion
+
+
+
+#df_promediosAbandono %>% filter(id == df_secundario_2015$id ) %>% mutate(abandonoReal = df_secundario_2015$abandono) -> df_comparacion
+```
+
