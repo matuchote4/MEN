@@ -1,8 +1,8 @@
 Configurar working directory:
 
 ```{r}
-#setwd("C:/Users/MatiasDeheza(PiDataS/SharePoint/Martin Zurita (Pi Data Strategy & Consulting)/MEN")
-setwd("C:/MEN")
+setwd("C:/Users/MatiasDeheza(PiDataS/SharePoint/Martin Zurita (Pi Data Strategy & Consulting)/MEN")
+#setwd("C:/MEN")
 ```
 
 
@@ -271,85 +271,7 @@ Elminacion de columnas inncesesarias
   df_all_secundario <- df_all_secundario[-c(18:28,38:48, 58:62, 71:81, 90:100, 109:110, 113:117, 126:130, 139:143, 152:156,165:182,197:202 )]
 ```
 
-Analisis de la Variable Abandono
-
-```{r}
-df_refinau <- df_all_secundario[c("id", "provincia", "anio", "abandono","Prop_Abandono")]
-```
-
-```{r}
-summary(df_quantile$ejey)
-```
-
-```{r}
-quantile(df_refinau$abandono, probs= seq(0.9,1,.01),na.rm = FALSE)
-```
-
-```{r}
-
-quantile(df_refinau$abandono, probs= seq(0.99,1,.001),na.rm = FALSE)
-
-```
-
-```{r}
-df_quantile  <- as.data.frame(quantile(df_refinau$abandono, probs= seq(0.8,1,.01),na.rm = FALSE))
-df_quantile$ejex <- rownames(df_quantile)
-colnames(df_quantile) <- c("ejey","ejex")
-df_quantile$ejex <- factor(df_quantile$ejex, levels = df_quantile$ejex[order(df_quantile$ejey)])
-
-df_quantile2  <- as.data.frame(quantile(df_refinau$abandono, probs= seq(0.99,1,.001),na.rm = FALSE))
-df_quantile2$ejex <- rownames(df_quantile2)
-colnames(df_quantile2) <- c("ejey","ejex")
-df_quantile2$ejex <- factor(df_quantile2$ejex, levels = df_quantile2$ejex[order(df_quantile2$ejey)])
-
-```
-
-```{r}
-library(ggplot2)
-a<-ggplot(df_quantile, aes(x = df_quantile$ejex, y = df_quantile$ejey )) + geom_col() + scale_y_continuous(labels = scales::comma) + labs(title = "Histograma de desercion") + xlab("Porcentaje") + ylab("Cantidad")
-b<-ggplot(df_quantile2, aes(x = df_quantile2$ejex, y = df_quantile2$ejey )) + geom_col() + scale_y_continuous(labels = scales::comma) + labs(title = "Histograma de desercion") + xlab("Porcentaje") + ylab("Cantidad")
-multiplot(a,b)
-
-```
-
-```{r}
-summary(df_quantile$ejey)
-
-```
-
-Filtros de valores extremos - La puta que te parió
-
-
-```{r}
-df_secundario_filtrado <- df_all_secundario %>% select(abandono) %>% filter(df_all_secundario$abandono < 140,df_all_secundario$abandono > 5 )
-
-```
-
-```{r}
-vecStatsAbandono <- summary(df_refinau$abandono)
-
-Min. <- as.integer(vecStatsAbandono[1])
-
-nuevoDF <- as.data.frame(Min.)
-
-#nuevoDF$Min. <- as.integer(vecStatsAbandono["Min."])
-nuevoDF$"1st Qu." <- as.integer(vecStatsAbandono["1st Qu."])
-nuevoDF$Median <- as.numeric(vecStatsAbandono["Median"])
-nuevoDF$Mean <- as.numeric(vecStatsAbandono["Mean"])
-nuevoDF$"St. dev." <- sd(df_refinau$abandono)
-nuevoDF$"3rd Qu." <- as.integer(vecStatsAbandono["3rd Qu."])
-nuevoDF$"Max." <- as.integer(vecStatsAbandono["Max."])
-
-View(nuevoDF)
-
-```
-
- 
 Exportar a csv 
 ```{r}
 write_csv(df_all_secundario, "df_all.csv")
 ```
-
-
-
-
