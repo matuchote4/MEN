@@ -4,3 +4,41 @@ author: "Matias Deheza"
 date: "19 April 2017"
 output: html_document
 ---
+
+```{r}
+library(readr)
+df_all_secundario<- read_csv("df_all.csv", col_types = cols(id = col_number(),
+                                                            sec_hs_pro_ncub = col_number(),
+                                                            sec_hs_otros_ncub = col_number()))
+
+```
+
+Separa data sets de entrenamiento
+
+```{r}
+library(dplyr)
+df_secundario_filtrado_resto <- df_all_secundario  %>% filter(anio != 2015)
+df_secundario_filtrado_2015 <- df_all_secundario  %>% filter(anio == 2015)
+
+```
+
+Estimacion basada en anio anterior
+```{r}
+df_secundario_filtrado_anioAnterior<- df_all_secundario %>% filter(anio == 2014)%>%select(id,abandono)
+```
+
+Join
+```{r}
+df_join <- merge(df_secundario_filtrado_2015,df_secundario_filtrado_anioAnterior, by = "id")
+df_join<- df_join %>%select(id,abandono=abandono.x,prediccion=abandono.y)
+
+```
+
+Metricas
+```{r}
+
+df_join<- df_join %>%mutate(errorAbsoluto= abs(abandono - prediccion)) 
+
+mean(df_join$errorAbsoluto)
+
+```

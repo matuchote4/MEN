@@ -4,15 +4,7 @@ author: "Matias Deheza"
 date: "19 April 2017"
 output: html_document
 ---
-library(readr)
 
-```{r}
-library(readr)
-df_all_secundario<- read_csv("df_all.csv", col_types = cols(id = col_number(),
-                                                            sec_hs_pro_ncub = col_number(),
-                                                            sec_hs_otros_ncub = col_number()))
-
-```
 
 Analisis de la Variable Abandono
 ```{r}
@@ -60,14 +52,6 @@ summary(df_quantile$ejey)
 
 ```
 
-Filtros de valores extremos - La puta que te parió
-
-
-```{r}
-library(dplyr)
-df_secundario_filtrado <- df_all_secundario %>% select(abandono) %>% filter(df_all_secundario$abandono < 140)
-
-```
 
 ```{r}
 vecStatsAbandono <- summary(df_refinau$abandono)
@@ -90,6 +74,7 @@ nuevoDF$"Max." <- as.integer(vecStatsAbandono["Max."])
 
 
 ```{r}
+library(dplyr)
 df_all_secundario %>% select(id, provincia, sector, abandono, Prop_Abandono) %>% arrange(abandono)  -> df_para_box
 
 boxplot(abandono*Prop_Abandono~provincia, data=df_para_box, col=1:24, outline=FALSE)
