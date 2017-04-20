@@ -37,8 +37,30 @@ df_join<- df_join %>%select(id,abandono=abandono.x,prediccion=abandono.y)
 Metricas
 ```{r}
 
-df_join<- df_join %>%mutate(errorAbsoluto= abs(abandono - prediccion)) 
+df_join<- df_join %>%mutate(errorAbsoluto= abs(abandono - prediccion)) %>%mutate(porcentajeError= 100*errorAbsoluto/abandono) 
 
-mean(df_join$errorAbsoluto)
+#Mean Absolute error
+MAE <- mean(df_join$errorAbsoluto)
+#mean(df_join$porcentajeError)
 
+#Root mean absolute error
+RMSE1 <- sqrt(mean(df_join$errorAbsoluto^2))
+
+#Root mean absolute error - Considerando la cantidad de filas
+RMSE2 <- sqrt(mean(df_join$errorAbsoluto^2/length(df_join)))
+
+errores <- data.frame(MAE,RMSE1,RMSE2)
+errores
+
+##No nos interesa el % tanto como nos interesa el absoluto???? Pregunta para evaluar
+```
+
+```{r}
+
+sum_abandono <- sum(df_join$abandono)
+sum_prediccion <-sum(df_join$prediccion)
+resta <-sum(df_join$abandono)-sum(df_join$prediccion)
+
+errores_acumulado <- data.frame(sum_abandono,sum_prediccion,resta)
+errores_acumulado
 ```
