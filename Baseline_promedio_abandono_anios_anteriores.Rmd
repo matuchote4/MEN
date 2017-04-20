@@ -81,7 +81,6 @@ abline(1,1, col="red")
 
 
 
-df_comparacion %>% filter(abandono < 100, prediccion < 200) %>% mutate(abandono_nivel = ifelse(any(abandono == 1:5), 1, ifelse(any(abandono == 6:10), 2, ifelse(any(abandono == 11:15), 3, ifelse(any(abandono == 16:20), 4, ifelse(any(abandono == 16:20), 4, 5)))))) -> df_test
 
 
 
