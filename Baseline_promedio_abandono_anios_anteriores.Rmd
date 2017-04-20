@@ -31,7 +31,61 @@ df_comparacion %>% select(id, abandono, prediccion = PromedioAbandono) -> df_com
 df_comparacion %>% mutate(errorAbsoluto = abs(abandono - prediccion)) -> df_comparacion
 
 
-
 #df_promediosAbandono %>% filter(id == df_secundario_2015$id ) %>% mutate(abandonoReal = df_secundario_2015$abandono) -> df_comparacion
 ```
+
+
+Metricas
+```{r}
+#Calculo de mean absolute error (error absoluto medio)
+
+errorAbsolutoMedio <- mean(df_comparacion$errorAbsoluto)
+
+
+#Calculo de Root Mean Squared Logarithmic Error
+#https://www.kaggle.com/wiki/RootMeanSquaredLogarithmicError
+
+
+df_comparacion %>% mutate(restaLogCuadrados = (log(prediccion+1)-log(abandono+1))^2) -> df_comparacion_RMSLE
+
+rmsle <- sqrt(mean(df_comparacion_RMSLE$restaLogCuadrados))
+
+#Root mean squared error
+RMSE1 <- sqrt(mean(df_comparacion$errorAbsoluto^2))
+
+metricas <- data.frame(errorAbsolutoMedio, RMSE1, rmsle)
+metricas
+```
+
+
+```{r}
+library(ggplot2)
+
+
+df_comparacion %>% filter(abandono < 100, prediccion < 200) -> df_prediccion
+
+
+plot(df_prediccion$abandono, df_prediccion$prediccion, type = "p")
+abline(1,1, col="red")
+
+```
+
+
+
+```{r}
+
+df_comparacion %>% filter(abandono < 100, prediccion < 200) %>% group_by(abandono) %>% summarise(prediccionAvg = mean(prediccion)) -> df_prediccion1
+
+plot(df_prediccion1$abandono, df_prediccion1$prediccionAvg, type = "l", col="blue")
+abline(1,1, col="red")
+
+
+
+df_comparacion %>% filter(abandono < 100, prediccion < 200) %>% mutate(abandono_nivel = ifelse(any(abandono == 1:5), 1, ifelse(any(abandono == 6:10), 2, ifelse(any(abandono == 11:15), 3, ifelse(any(abandono == 16:20), 4, ifelse(any(abandono == 16:20), 4, 5)))))) -> df_test
+
+
+
+
+```
+
 
